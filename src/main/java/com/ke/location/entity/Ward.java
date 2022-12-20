@@ -1,6 +1,5 @@
 package com.ke.location.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +10,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="tbl_counties")
+@Table(name="tbl_wards")
 @Entity
-public class SubCounty {
+public class Ward {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     private String name;
 
 }
+
+
+
+
+
