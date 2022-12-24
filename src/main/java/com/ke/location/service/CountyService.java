@@ -10,7 +10,7 @@ public class CountyService {
     @Autowired
     private CountyRepository countyRepository;
 
-    public County addCounty(County county){
+    public County addCounty(County county) {
         return countyRepository.save(county);
     }
 }

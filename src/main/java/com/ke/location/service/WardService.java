@@ -12,7 +12,7 @@ public class WardService {
     @Autowired
     private WardRepository wardRepository;
 
-    public Ward addWard(Ward ward){
+    public Ward addWard(Ward ward) {
         return wardRepository.save(ward);
     }
 }
