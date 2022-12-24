@@ -15,4 +15,6 @@ public class WardService {
     public Ward addWard(Ward ward) {
         return wardRepository.save(ward);
     }
+
+
 }
