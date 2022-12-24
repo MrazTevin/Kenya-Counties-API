@@ -19,4 +19,8 @@ public class SubCounty {
     private Long id;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "subCounty_id")
+    private County county;
+
 }

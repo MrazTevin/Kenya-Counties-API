@@ -17,7 +17,9 @@ public class Ward {
     @Id
     private Long id;
     private String name;
-
+    @ManyToOne
+    @JoinColumn(name = "ward_id")
+    private SubCounty subCounty;
 }
 
 
