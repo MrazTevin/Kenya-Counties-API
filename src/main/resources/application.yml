@@ -2,7 +2,7 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-  port: 9095
+  port: 9096
 
 spring:
   datasource:
