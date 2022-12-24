@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     password: natujenge
-    url: jdbc:mysql://164.92.70.172:3315/locations?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://164.92.70.172:3315/location?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
     username: root
   jpa:
     hibernate:
