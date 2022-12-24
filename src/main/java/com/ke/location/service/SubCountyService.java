@@ -5,7 +5,9 @@ import com.ke.location.entity.SubCounty;
 import com.ke.location.repository.CountyRepository;
 import com.ke.location.repository.SubCountyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SubCountyService {
     @Autowired
     private SubCountyRepository subCountyRepository;

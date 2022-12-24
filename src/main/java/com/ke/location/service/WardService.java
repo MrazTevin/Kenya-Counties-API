@@ -5,7 +5,9 @@ import com.ke.location.entity.Ward;
 import com.ke.location.repository.SubCountyRepository;
 import com.ke.location.repository.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WardService {
     @Autowired
     private WardRepository wardRepository;
