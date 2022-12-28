@@ -1,9 +1,23 @@
 package com.ke.location.repository;
 
+import com.ke.location.controller.dto.WardDto;
 import com.ke.location.entity.Ward;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface WardRepository extends JpaRepository<Ward,Long> {
+public interface WardRepository extends PagingAndSortingRepository<Ward,Long>, QuerydslPredicateExecutor<Ward> {
+    Optional<WardDto> findBySubCountyIdAndId(Long subCountyId, Long id);
+
+    Optional<WardDto> findWardByName(String name);
+
+    Optional<WardDto> findWardById(Long id);
+
+    Page<WardDto> findBySubCountyIdAndNameContaining(Long subCountyId, String name, Pageable pageable);
 }
