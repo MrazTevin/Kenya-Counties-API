@@ -5,6 +5,7 @@ import com.ke.location.controller.dto.SubCountyDto;
 import com.ke.location.entity.SubCounty;
 
 import com.ke.location.repository.SubCountyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class SubCountyService {
     @Autowired
     private SubCountyRepository subCountyRepository;
@@ -62,9 +64,9 @@ public class SubCountyService {
 
             QSubCounty qSubCounty = QSubCounty.subCounty;
 
-            subCountyPage = subCountyRepository.findBy(qSubCounty.county.id.eq(countyId).andAnyOf(qSubCounty.name.containsIgnoreCase(search))), q -> q.sortBy(sort).as(SubCountyDto.class).page(pageable));
+            subCountyPage = subCountyRepository.findBy(qSubCounty.county.id.eq(countyId).andAnyOf(qSubCounty.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(SubCountyDto.class).page(pageable));
         } else {
-            subCountyPage = subcountyRepository.findAllByCounty_id(countyId, pageable);
+            subCountyPage = subCountyRepository.findAllByCounty_id(countyId, pageable);
         }
 
         return new ListResponse(subCountyPage.getContent(), subCountyPage.getTotalPages(), subCountyPage.getNumberOfElements(), subCountyPage.getTotalElements());

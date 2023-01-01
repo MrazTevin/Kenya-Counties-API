@@ -3,10 +3,11 @@ package com.ke.location.service;
 import com.ke.location.controller.dto.ListResponse;
 import com.ke.location.controller.dto.SubCountyDto;
 import com.ke.location.controller.dto.WardDto;
-import com.ke.location.entity.SubCounty;
+
 import com.ke.location.entity.Ward;
-import com.ke.location.repository.SubCountyRepository;
+
 import com.ke.location.repository.WardRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class WardService {
     @Autowired
     private WardRepository wardRepository;
@@ -55,7 +57,7 @@ public class WardService {
     }
 
 
-    public ListResponse getAllFarmers(int page, int perPage, String search, Long subCountyId) {
+    public ListResponse getAllWards(int page, int perPage, String search, Long subCountyId) {
 
         page = page - 1;
         Sort sort = Sort.by(Sort.Direction.DESC, "name");
@@ -66,12 +68,12 @@ public class WardService {
 
             QWard qWard = QWard.ward;
 
-            wardPage = wardRepository.findBy(qward.subCounty.id.eq(subCountyId).andAnyOf(qWard.name.containsIgnoreCase(search))), q -> q.sortBy(sort).as(WardDto.class).page(pageable));
+            wardPage = wardRepository.findBy(qward.subCounty.id.eq(subCountyId).andAnyOf(qWard.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(WardDto.class).page(pageable));
         } else {
             wardPage = wardRepository.findAllBysubCounty_id(subCountyId, pageable);
         }
 
-        return new ListResponse(wardPage.getContent(), wardPage.getTotalPages(), ward.getNumberOfElements(), wardPage.getTotalElements());
+        return new ListResponse(wardPage.getContent(), wardPage.getTotalPages(), wardPage.getNumberOfElements(), wardPage.getTotalElements());
     }
 
 }

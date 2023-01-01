@@ -40,7 +40,7 @@ public class CountyService {
         Page<CountyDto> countyPage;
         if (search != null && !search.isEmpty()) {
             QCounty qCounty = QCounty.county;
-            countyPage = countyRepository.findBy(qCounty.name.eq(countyName).andAnyOf(qCounty.countyName.containsIgnoreCase(search))), q -> q.sortBy(sort).as(CountyDto.class).page(pageable));
+            countyPage = countyRepository.findBy(qCounty.name.eq(countyName).andAnyOf(qCounty.countyName.containsIgnoreCase(search)), q -> q.sortBy(sort).as(CountyDto.class).page(pageable));
 
             return new ListResponse(countyPage.getContent(), countyPage.getTotalPages(), countyPage.getNumberOfElements(), countyPage.getTotalElements());
         } else {

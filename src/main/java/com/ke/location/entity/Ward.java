@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name="tbl_wards")
 @Entity
@@ -22,7 +21,13 @@ public class Ward {
     @ManyToOne
     @JoinColumn(name = "ward_id")
     private SubCounty subCounty;
+
+    public Ward(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
+
 
 
 

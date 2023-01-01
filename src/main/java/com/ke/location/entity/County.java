@@ -11,7 +11,6 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name="tbl_counties")
 @Entity
@@ -21,4 +20,8 @@ public class County {
     private Long id;
     private String name;
 
+    public County(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

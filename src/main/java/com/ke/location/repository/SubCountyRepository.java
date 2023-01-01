@@ -21,4 +21,6 @@ public interface SubCountyRepository extends PagingAndSortingRepository<SubCount
     Optional<SubCountyDto> findSubCountyByName(String name);
 
     Page<SubCountyDto> findByCountyIdAndNameContaining(Long subCountyId, String name, Pageable pageable);
+
+    Page<SubCountyDto> findAllByCounty_id(Long countyId, Pageable pageable);
 }

@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name="tbl_counties")
 @Entity
@@ -24,4 +23,8 @@ public class SubCounty {
     @JoinColumn(name = "subCounty_id")
     private County county;
 
+    public SubCounty(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

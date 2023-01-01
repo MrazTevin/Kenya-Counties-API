@@ -1,5 +1,6 @@
 package com.ke.location.repository;
 
+import com.ke.location.controller.dto.SubCountyDto;
 import com.ke.location.controller.dto.WardDto;
 import com.ke.location.entity.Ward;
 import org.springframework.data.domain.Page;
@@ -20,4 +21,6 @@ public interface WardRepository extends PagingAndSortingRepository<Ward,Long>, Q
     Optional<WardDto> findWardById(Long id);
 
     Page<WardDto> findBySubCountyIdAndNameContaining(Long subCountyId, String name, Pageable pageable);
+
+    Page<SubCountyDto> findAllBysubCounty_id(Long subCountyId, Pageable pageable);
 }
