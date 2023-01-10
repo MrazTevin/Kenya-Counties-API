@@ -1,6 +1,6 @@
 package com.ke.location.repository;
 
-import com.ke.location.controller.dto.WardDto;
+import com.ke.location.web.rest.dto.WardDto;
 import com.ke.location.entity.Ward;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

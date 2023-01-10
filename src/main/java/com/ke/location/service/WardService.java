@@ -1,8 +1,7 @@
 package com.ke.location.service;
 
-import com.ke.location.controller.dto.ListResponse;
-import com.ke.location.controller.dto.SubCountyDto;
-import com.ke.location.controller.dto.WardDto;
+import com.ke.location.web.rest.dto.ListResponse;
+import com.ke.location.web.rest.dto.WardDto;
 
 import com.ke.location.entity.QWard;
 import com.ke.location.entity.Ward;
@@ -38,7 +37,7 @@ public class WardService {
 
         return wardRepository.findWardById(id);
     }
-    public Optional<WardDto> findByName(String name) {
+    public Optional<Ward> findByName(String name) {
 
         return wardRepository.findWardByName(name);
     }

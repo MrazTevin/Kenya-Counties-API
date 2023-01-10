@@ -1,4 +1,4 @@
-package com.ke.location.controller.dto;
+package com.ke.location.web.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

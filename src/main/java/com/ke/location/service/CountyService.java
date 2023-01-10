@@ -1,7 +1,7 @@
 package com.ke.location.service;
 
-import com.ke.location.controller.dto.CountyDto;
-import com.ke.location.controller.dto.ListResponse;
+import com.ke.location.web.rest.dto.CountyDto;
+import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.entity.County;
 import com.ke.location.entity.QCounty;
 import com.ke.location.repository.CountyRepository;
@@ -29,6 +29,15 @@ public class CountyService {
             return county;
         } else {
             throw new IllegalStateException("county with name " + name + " does not exist");
+        }
+    }
+    public Optional<County> findById(Long id) {
+        Optional<County> county = countyRepository.findById(id);
+
+        if (county.isPresent()) {
+            return county;
+        } else {
+            throw new IllegalStateException("county with id " + id + " does not exist");
         }
     }
 

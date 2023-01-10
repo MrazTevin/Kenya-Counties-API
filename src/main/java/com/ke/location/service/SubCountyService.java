@@ -1,7 +1,7 @@
 package com.ke.location.service;
 
-import com.ke.location.controller.dto.ListResponse;
-import com.ke.location.controller.dto.SubCountyDto;
+import com.ke.location.web.rest.dto.ListResponse;
+import com.ke.location.web.rest.dto.SubCountyDto;
 import com.ke.location.entity.QSubCounty;
 import com.ke.location.entity.SubCounty;
 
@@ -35,7 +35,7 @@ public class SubCountyService {
 
         return subCountyRepository.findSubCountyById(id);
     }
-    public Optional<SubCountyDto> findByName(String name) {
+    public Optional<SubCounty> findByName(String name) {
 
         return subCountyRepository.findSubCountyByName(name);
     }

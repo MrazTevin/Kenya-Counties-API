@@ -1,11 +1,9 @@
 package com.ke.location.repository;
 
-import com.ke.location.controller.dto.SubCountyDto;
-import com.ke.location.entity.County;
+import com.ke.location.web.rest.dto.SubCountyDto;
 import com.ke.location.entity.SubCounty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

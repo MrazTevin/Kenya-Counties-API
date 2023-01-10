@@ -1,4 +1,4 @@
-package com.ke.location.controller.dto;
+package com.ke.location.web.rest.dto;
 
 public interface WardDto {
     public String getWardName();
