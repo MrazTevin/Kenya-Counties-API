@@ -3,6 +3,7 @@ package com.ke.location.service;
 import com.ke.location.controller.dto.CountyDto;
 import com.ke.location.controller.dto.ListResponse;
 import com.ke.location.entity.County;
+import com.ke.location.entity.QCounty;
 import com.ke.location.repository.CountyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

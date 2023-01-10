@@ -1,7 +1,7 @@
 package com.ke.location.controller.dto;
 
 public interface WardDto {
-    public String getSubCountyName();
+    public String getWardName();
     public Long getId();
     public WardView getWard();
 

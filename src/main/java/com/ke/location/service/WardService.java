@@ -4,6 +4,7 @@ import com.ke.location.controller.dto.ListResponse;
 import com.ke.location.controller.dto.SubCountyDto;
 import com.ke.location.controller.dto.WardDto;
 
+import com.ke.location.entity.QWard;
 import com.ke.location.entity.Ward;
 
 import com.ke.location.repository.WardRepository;
@@ -63,7 +64,7 @@ public class WardService {
         Sort sort = Sort.by(Sort.Direction.DESC, "name");
         Pageable pageable = PageRequest.of(page, perPage, sort);
 
-        Page<SubCountyDto> wardPage;
+        Page<WardDto> wardPage;
         if (search != null && !search.isEmpty()) {
 
             QWard qWard = QWard.ward;

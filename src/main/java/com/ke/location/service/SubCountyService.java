@@ -2,6 +2,7 @@ package com.ke.location.service;
 
 import com.ke.location.controller.dto.ListResponse;
 import com.ke.location.controller.dto.SubCountyDto;
+import com.ke.location.entity.QSubCounty;
 import com.ke.location.entity.SubCounty;
 
 import com.ke.location.repository.SubCountyRepository;
