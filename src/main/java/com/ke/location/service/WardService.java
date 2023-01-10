@@ -68,7 +68,7 @@ public class WardService {
 
             QWard qWard = QWard.ward;
 
-            wardPage = wardRepository.findBy(qward.subCounty.id.eq(subCountyId).andAnyOf(qWard.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(WardDto.class).page(pageable));
+            wardPage = wardRepository.findBy(qWard.subCounty.id.eq(subCountyId).andAnyOf(qWard.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(WardDto.class).page(pageable));
         } else {
             wardPage = wardRepository.findAllBysubCounty_id(subCountyId, pageable);
         }

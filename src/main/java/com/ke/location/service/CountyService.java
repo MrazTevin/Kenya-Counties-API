@@ -31,7 +31,7 @@ public class CountyService {
         }
     }
 
-    public ListResponse getAllCounties(int page, int perPage, String search, String name) {
+    public ListResponse getAllCounties(int page, int perPage, String search, Long countyId) {
 
         page = page - 1;
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -40,7 +40,8 @@ public class CountyService {
         Page<CountyDto> countyPage;
         if (search != null && !search.isEmpty()) {
             QCounty qCounty = QCounty.county;
-            countyPage = countyRepository.findBy(qCounty.name.eq(countyName).andAnyOf(qCounty.countyName.containsIgnoreCase(search)), q -> q.sortBy(sort).as(CountyDto.class).page(pageable));
+
+            countyPage = countyRepository.findBy(qCounty.id.eq(countyId).andAnyOf(qCounty.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(CountyDto.class).page(pageable));
 
             return new ListResponse(countyPage.getContent(), countyPage.getTotalPages(), countyPage.getNumberOfElements(), countyPage.getTotalElements());
         } else {
