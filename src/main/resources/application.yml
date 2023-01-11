@@ -1,0 +1,41 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 9096
+
+spring:
+  datasource:
+    password: natujenge
+    url: jdbc:mysql://164.92.70.172:3315/location?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+
+
+  mail:
+    host: localhost
+    port: 1025
+    username: hello
+    password: hello
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
