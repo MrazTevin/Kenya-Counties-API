@@ -1,5 +1,6 @@
 package com.ke.location.web.rest;
 
+import com.ke.location.entity.County;
 import com.ke.location.entity.SubCounty;
 import com.ke.location.entity.Ward;
 import com.ke.location.service.WardService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+import static com.ke.location.entity.QCounty.county;
+
 @Slf4j
 @RequestMapping(path = "/api/v1")
 public class WardResource {
@@ -31,22 +34,20 @@ public class WardResource {
     @GetMapping("/filter-by-ward-name")
     public ResponseEntity<?> filterByWardNameAndSubCountyId(
             @RequestParam("per_page") int perPage,
-            @RequestParam("page") int page,//later we will use security credential
+            @RequestParam("page") int page,
+            @RequestParam(value = "id", required = false) Long id,
             @RequestParam(name = "name",required = false) String name
+
     )
     {
 
         try {
-            log.debug(
 
-                   // CountyDto.Id(),
-                    name
-            );
 
             ListResponse ward = wardService.filterByNameAndSubCountyId(
                     page,
                     perPage,
-                    //userDetails.getCooperative().getId(),
+                     id,
                     name
             );
             //LATER add HTTP headers

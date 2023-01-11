@@ -41,20 +41,17 @@ public class SubCountyResource {
     public ResponseEntity<?> filterBySubCountyNameAndCooperativeId(
             @RequestParam("per_page") int perPage,
             @RequestParam("page") int page,//later we will use security credential
+            @RequestParam(name = "id", required = false) Long id,
             @RequestParam(name = "name", required = false) String name
     ) {
 
         try {
-            log.debug(
 
-                    // CountyDto.Id(),
-                    name
-            );
 
             ListResponse subCounty = subCountyService.filterByNameAndCountyId(
                     page,
                     perPage,
-                    //userDetails.getCooperative().getId(),
+                    id,
                     name
             );
             //LATER add HTTP headers
