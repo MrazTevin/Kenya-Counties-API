@@ -86,4 +86,21 @@ public class SubCountyResource {
             }
 
     }
+    @GetMapping
+    ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
+                             @RequestParam("page") int page,
+                             @RequestParam(name="search", required = false) String search,
+                             @RequestParam(name = "subCounty_id", required = false) Long subCountyId) {
+        log.info("Getting all SubCounties");
+
+        try {
+
+            ListResponse listResponse = subCountyService.getAllSubCounties(page, perPage, search, subCountyId);
+            return new ResponseEntity<>(listResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error ", e);
+            return new ResponseEntity(new RestResponse(true, "Error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
     }

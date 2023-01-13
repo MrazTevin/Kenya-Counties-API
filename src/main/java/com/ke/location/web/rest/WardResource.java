@@ -81,4 +81,21 @@ public class WardResource {
         }
 
     }
+    @GetMapping
+    ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
+                             @RequestParam("page") int page,
+                             @RequestParam(name="search", required = false) String search,
+                             @RequestParam(name = "ward_id", required = false) Long wardId) {
+        log.info("Getting all Wards");
+
+        try {
+
+            ListResponse listResponse = wardService.getAllWards(page, perPage, search, wardId);
+            return new ResponseEntity<>(listResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error ", e);
+            return new ResponseEntity(new RestResponse(true, "Error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }

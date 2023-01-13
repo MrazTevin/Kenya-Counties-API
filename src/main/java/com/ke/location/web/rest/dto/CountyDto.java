@@ -1,7 +1,7 @@
 package com.ke.location.web.rest.dto;
 
 public interface CountyDto {
-    public String getCountyName();
+    public String getName();
     public Long getId();
     public CountyView getCounty();
 
@@ -9,6 +9,6 @@ public interface CountyDto {
 
         public Long getId();
 
-        public String getCountyName();
+        public String getName();
     }
 }
