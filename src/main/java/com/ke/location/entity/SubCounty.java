@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="tbl_counties")
+@Table(name="tbl_subCounties")
 @Entity
 public class SubCounty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class SubCounty {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "subCounty_id")
+    @JoinColumn(name = "county_id")
     private County county;
 
     public SubCounty(Long id, String name) {

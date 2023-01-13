@@ -1,7 +1,7 @@
 package com.ke.location.web.rest.dto;
 
 public interface WardDto {
-    public String getWardName();
+    public String getName();
     public Long getId();
     public WardView getWard();
 
@@ -9,6 +9,6 @@ public interface WardDto {
 
         public Long getId();
 
-        public String getWardName();
+        public String getName();
     }
 }

@@ -28,19 +28,12 @@ public class WardService {
         return wardRepository.save(ward);
     }
 
-    public Optional<WardDto> findBySubCountyIdAndId(Long id, Long subCountyId) {
+//    public Optional<WardDto> findById(Long id, Long subCountyId) {
+//
+//        return wardRepository.findBySubCountyIdAndId(subCountyId, id);
+//    }
 
-        return wardRepository.findBySubCountyIdAndId(subCountyId, id);
-    }
 
-    public Optional<WardDto> findById(Long id) {
-
-        return wardRepository.findWardById(id);
-    }
-    public Optional<Ward> findByName(String name) {
-
-        return wardRepository.findWardByName(name);
-    }
 
 
     @Transactional(readOnly = true)
@@ -70,7 +63,7 @@ public class WardService {
 
             wardPage = wardRepository.findBy(qWard.subCounty.id.eq(subCountyId).andAnyOf(qWard.name.containsIgnoreCase(search)), q -> q.sortBy(sort).as(WardDto.class).page(pageable));
         } else {
-            wardPage = wardRepository.findAllBysubCounty_id(subCountyId, pageable);
+            wardPage = wardRepository.findAllBySubCounty_id(subCountyId, pageable);
         }
 
         return new ListResponse(wardPage.getContent(), wardPage.getTotalPages(), wardPage.getNumberOfElements(), wardPage.getTotalElements());

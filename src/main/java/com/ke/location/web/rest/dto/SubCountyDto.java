@@ -1,7 +1,7 @@
 package com.ke.location.web.rest.dto;
 
 public interface SubCountyDto {
-    public String getSubCountyName();
+    public String getName();
     public Long getId();
     public SubCountyView getSubCounty();
 
@@ -9,6 +9,6 @@ public interface SubCountyDto {
 
         public Long getId();
 
-        public String getSubCountyName();
+        public String getName();
     }
 }

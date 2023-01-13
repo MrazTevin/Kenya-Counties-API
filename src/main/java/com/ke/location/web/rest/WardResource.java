@@ -7,6 +7,7 @@ import com.ke.location.service.WardService;
 import com.ke.location.web.rest.dto.CountyDto;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.web.rest.dto.RestResponse;
+import com.ke.location.web.rest.dto.WardDto;
 import com.ke.location.web.rest.request.SubCountyRequest;
 import com.ke.location.web.rest.request.WardRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -59,26 +60,41 @@ public class WardResource {
         }
 
     }
-    @GetMapping(path = "{name}")
-    ResponseEntity<?> findByName(@PathVariable("name") String name) {
+//    @GetMapping(path = "{id}")
+//    ResponseEntity<?> findById(@PathVariable("id") Long id,Long subCountyId) {
+//
+//        try {
+//            Optional<WardDto> wardOptional = wardService.findById(id,subCountyId);
+//
+//            if (wardOptional.isPresent()) {
+//
+//                return new ResponseEntity<>(wardOptional.get(), HttpStatus.OK);
+//            } else {
+//                return new ResponseEntity<>(new RestResponse(true, "Ward not found"), HttpStatus.NOT_FOUND);
+//
+//            }
+//        }
+//        catch (Exception e) {
+//            log.error("error ", e);
+//            return new ResponseEntity<>(new RestResponse(true, "Ward not found, contact admin"),
+//                    HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//    }
+    @GetMapping
+    ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
+                             @RequestParam("page") int page,
+                             @RequestParam(name="search", required = false) String search,
+                             @RequestParam(name = "ward_id", required = false) Long wardId) {
+        log.info("Getting all Wards");
 
         try {
-            Optional<Ward> wardOptional = wardService.findByName(name);
 
-            if (wardOptional.isPresent()) {
-                Ward ward = wardOptional.get();
-
-                WardRequest response = modelMapper.map(ward, WardRequest.class);
-                return new ResponseEntity<>(response, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(new RestResponse(true, "Ward not found"), HttpStatus.NOT_FOUND);
-
-            }
-        }
-        catch (Exception e) {
-            log.error("error ", e);
-            return new ResponseEntity<>(new RestResponse(true, "Ward not found, contact admin"),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            ListResponse listResponse = wardService.getAllWards(page, perPage, search, wardId);
+            return new ResponseEntity<>(listResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error ", e);
+            return new ResponseEntity(new RestResponse(true, "Error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

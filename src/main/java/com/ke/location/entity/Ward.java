@@ -19,7 +19,7 @@ public class Ward {
     private Long id;
     private String name;
     @ManyToOne
-    @JoinColumn(name = "ward_id")
+    @JoinColumn(name = "subCounty_id")
     private SubCounty subCounty;
 
     public Ward(Long id, String name) {

@@ -51,7 +51,7 @@ public class CountyResource {
     ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
                              @RequestParam("page") int page,
                              @RequestParam(name="search", required = false) String search,
-                             @RequestParam(name = "cooperative_id", required = false) Long countyId) {
+                             @RequestParam(name = "county_id", required = false) Long countyId) {
         log.info("Getting all Counties");
 
         try {
