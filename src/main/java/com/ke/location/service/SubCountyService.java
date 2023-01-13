@@ -26,19 +26,12 @@ public class SubCountyService {
     public SubCounty addSubCounty(SubCounty subCounty) {
         return subCountyRepository.save(subCounty);
     }
-    public Optional<SubCountyDto> findByCountyIdAndId(Long id, Long countyId) {
+    public Optional<SubCountyDto> findById(Long id, Long countyId) {
 
         return subCountyRepository.findByCountyIdAndId(countyId, id);
     }
 
-    public Optional<SubCountyDto> findById(Long id) {
 
-        return subCountyRepository.findSubCountyById(id);
-    }
-    public Optional<SubCounty> findByName(String name) {
-
-        return subCountyRepository.findSubCountyByName(name);
-    }
 
     @Transactional(readOnly = true)
     public ListResponse filterByNameAndCountyId(int page, int perPage, Long countyId, String name) {

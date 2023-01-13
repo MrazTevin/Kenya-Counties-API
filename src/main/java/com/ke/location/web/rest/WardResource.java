@@ -7,6 +7,7 @@ import com.ke.location.service.WardService;
 import com.ke.location.web.rest.dto.CountyDto;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.web.rest.dto.RestResponse;
+import com.ke.location.web.rest.dto.WardDto;
 import com.ke.location.web.rest.request.SubCountyRequest;
 import com.ke.location.web.rest.request.WardRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -59,17 +60,15 @@ public class WardResource {
         }
 
     }
-    @GetMapping(path = "{name}")
-    ResponseEntity<?> findByName(@PathVariable("name") String name) {
+    @GetMapping(path = "{id}")
+    ResponseEntity<?> findById(@PathVariable("id") Long id,Long subCountyId) {
 
         try {
-            Optional<Ward> wardOptional = wardService.findByName(name);
+            Optional<WardDto> wardOptional = wardService.findById(id,subCountyId);
 
             if (wardOptional.isPresent()) {
-                Ward ward = wardOptional.get();
 
-                WardRequest response = modelMapper.map(ward, WardRequest.class);
-                return new ResponseEntity<>(response, HttpStatus.OK);
+                return new ResponseEntity<>(wardOptional.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(new RestResponse(true, "Ward not found"), HttpStatus.NOT_FOUND);
 
