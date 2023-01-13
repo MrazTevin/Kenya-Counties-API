@@ -28,10 +28,10 @@ public class WardService {
         return wardRepository.save(ward);
     }
 
-    public Optional<WardDto> findById(Long id, Long subCountyId) {
-
-        return wardRepository.findBySubCountyIdAndId(subCountyId, id);
-    }
+//    public Optional<WardDto> findById(Long id, Long subCountyId) {
+//
+//        return wardRepository.findBySubCountyIdAndId(subCountyId, id);
+//    }
 
 
 

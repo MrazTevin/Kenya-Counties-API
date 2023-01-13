@@ -26,10 +26,10 @@ public class SubCountyService {
     public SubCounty addSubCounty(SubCounty subCounty) {
         return subCountyRepository.save(subCounty);
     }
-    public Optional<SubCountyDto> findById(Long id, Long countyId) {
-
-        return subCountyRepository.findByCountyIdAndId(countyId, id);
-    }
+//    public Optional<SubCountyDto> findById(Long id, Long countyId) {
+//
+//        return subCountyRepository.findByCountyIdAndId(countyId, id);
+//    }
 
 
 

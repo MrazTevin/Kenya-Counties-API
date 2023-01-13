@@ -60,27 +60,27 @@ public class WardResource {
         }
 
     }
-    @GetMapping(path = "{id}")
-    ResponseEntity<?> findById(@PathVariable("id") Long id,Long subCountyId) {
-
-        try {
-            Optional<WardDto> wardOptional = wardService.findById(id,subCountyId);
-
-            if (wardOptional.isPresent()) {
-
-                return new ResponseEntity<>(wardOptional.get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(new RestResponse(true, "Ward not found"), HttpStatus.NOT_FOUND);
-
-            }
-        }
-        catch (Exception e) {
-            log.error("error ", e);
-            return new ResponseEntity<>(new RestResponse(true, "Ward not found, contact admin"),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+//    @GetMapping(path = "{id}")
+//    ResponseEntity<?> findById(@PathVariable("id") Long id,Long subCountyId) {
+//
+//        try {
+//            Optional<WardDto> wardOptional = wardService.findById(id,subCountyId);
+//
+//            if (wardOptional.isPresent()) {
+//
+//                return new ResponseEntity<>(wardOptional.get(), HttpStatus.OK);
+//            } else {
+//                return new ResponseEntity<>(new RestResponse(true, "Ward not found"), HttpStatus.NOT_FOUND);
+//
+//            }
+//        }
+//        catch (Exception e) {
+//            log.error("error ", e);
+//            return new ResponseEntity<>(new RestResponse(true, "Ward not found, contact admin"),
+//                    HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//    }
     @GetMapping
     ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
                              @RequestParam("page") int page,

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface WardRepository extends PagingAndSortingRepository<Ward,Long>, QuerydslPredicateExecutor<Ward> {
-    Optional<WardDto> findBySubCountyIdAndId(Long subCountyId, Long id);
+//    Optional<WardDto> findBySubCountyIdAndId(Long subCountyId, Long id);
 
 
     Page<WardDto> findBySubCountyIdAndNameContaining(Long subCountyId, String name, Pageable pageable);
