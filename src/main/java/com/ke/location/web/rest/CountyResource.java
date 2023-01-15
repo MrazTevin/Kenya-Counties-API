@@ -14,15 +14,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 @Slf4j
+@RestController
 @RequestMapping(path = "/api/v1")
+
 public class CountyResource {
     @Autowired
     private CountyService countyService;
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private  ModelMapper modelMapper;
     @PostMapping("/county")
-    public County addCounty(@RequestBody County county){
-        return countyService.addCounty(county);
+    ResponseEntity<County> addCounty(@RequestBody County county){
+        log.info("request to add new County");
+
+        County newCounty = countyService.addCounty(county);
+
+        return new ResponseEntity<>(newCounty, HttpStatus.OK);
+//        return countyService.addCounty(county);
     }
     @GetMapping(path = "{name}")
     ResponseEntity<?> findByName(@PathVariable("name") String  name) {
