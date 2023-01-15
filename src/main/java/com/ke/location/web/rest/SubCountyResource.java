@@ -34,8 +34,12 @@ public class SubCountyResource {
     private CountyService countyService;
 
     @PostMapping("/subCounty")
-    public SubCounty addSubCounty(@RequestBody SubCounty subCounty) {
-        return subCountyService.addSubCounty(subCounty);
+    ResponseEntity< SubCounty>addSubCounty(@RequestBody SubCounty subCounty) {
+        log.info("request to add new subCountyCounty");
+
+        SubCounty newSubCounty = subCountyService.addSubCounty(subCounty);
+
+        return new ResponseEntity<>(newSubCounty, HttpStatus.OK);
     }
 
     @GetMapping("/filter-by-subCounty-name")

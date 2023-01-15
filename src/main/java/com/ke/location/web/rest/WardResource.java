@@ -29,8 +29,10 @@ public class WardResource {
     @Autowired
     private WardService wardService;
     @PostMapping("/ward")
-    public Ward addWard(@RequestBody Ward ward){
-        return wardService.addWard(ward);
+    ResponseEntity< Ward> addWard(@RequestBody Ward ward){
+        log.info("request to add new Ward");
+        Ward newWard=wardService.addWard(ward);
+        return new ResponseEntity<>(newWard, HttpStatus.OK);
     }
     @GetMapping("/filter-by-ward-name")
     public ResponseEntity<?> filterByWardNameAndSubCountyId(
