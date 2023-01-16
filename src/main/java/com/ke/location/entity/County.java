@@ -1,10 +1,7 @@
 package com.ke.location.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,15 +9,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="tbl_counties")
+//@RequiredArgsConstructor
+@Table(name="counties")
 @Entity
 public class County {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Integer id;
     private String name;
 
-    public County(Long id, String name) {
+    public County(int id, String name) {
         this.id = id;
         this.name = name;
     }

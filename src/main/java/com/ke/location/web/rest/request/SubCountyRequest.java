@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubCountyRequest {
-    public Long id;
+    public Integer id;
     public String name;
+    public String ward;
 }

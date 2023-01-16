@@ -11,12 +11,18 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SubCountyRepository extends PagingAndSortingRepository<SubCounty,Long>, QuerydslPredicateExecutor<SubCounty> {
+public interface SubCountyRepository extends PagingAndSortingRepository<SubCounty,Integer>, QuerydslPredicateExecutor<SubCounty> {
     //Optional<SubCountyDto> findByCountyIdAndId(Long countyId, Long id);
 
 
 
-    Page<SubCountyDto> findByCountyIdAndNameContaining(Long countyId, String name, Pageable pageable);
+    Page<SubCountyDto> findByCountyIdAndNameContaining(Integer countyId, String name, Pageable pageable);
+    Page<SubCountyDto> findByCountyIdAndNameAndWardContaining(Integer countyId, String name,String ward, Pageable pageable);
+    Page<SubCountyDto> findAllByCountyId(Integer countyId, Pageable pageable);
 
-    Page<SubCountyDto> findAllByCounty_id(Long countyId, Pageable pageable);
+    Page<SubCountyDto> findByCountyIdAndWardContaining(Integer countyId, String ward, Pageable pageable);
+
+    Page<SubCountyDto> findByNameAndWardContaining(String name, String ward, Pageable pageable);
+
+   // Page<SubCountyDto> findByCountyIdAndSubCountyNameAndWardContaining(Integer countyId, String name, String ward, Pageable pageable);
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CountyRepository extends PagingAndSortingRepository<County,Long>, QuerydslPredicateExecutor<County> {
-    Optional<County> getCountyByName(String name);
+public interface CountyRepository extends PagingAndSortingRepository<County,Integer>, QuerydslPredicateExecutor<County> {
+
+
+    Optional<County> getCountyByName(String county_name);
 }
