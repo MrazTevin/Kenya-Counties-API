@@ -1,5 +1,6 @@
 package com.ke.location.service;
 
+
 import com.ke.location.web.rest.dto.CountyDto;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.entity.County;
@@ -19,19 +20,19 @@ public class CountyService {
     @Autowired
     private CountyRepository countyRepository;
 
-    public County addCounty(County county) {
-        return countyRepository.save(county);
-    }
-    public Optional<County> getCountyByName(String name) {
-        Optional<County> county = countyRepository.getCountyByName(name);
+//    public County addCounty(County county) {
+//        return countyRepository.save(county);
+//    }
+    public Optional<County> getCountyByCounty_name(String county_name) {
+        Optional<County> county = countyRepository.getCountyByName(county_name);
 
         if (county.isPresent()) {
             return county;
         } else {
-            throw new IllegalStateException("county with name " + name + " does not exist");
+            throw new IllegalStateException("county with name " + county_name + " does not exist");
         }
     }
-    public Optional<County> findById(Long id) {
+    public Optional<County> findById(Integer id) {
         Optional<County> county = countyRepository.findById(id);
 
         if (county.isPresent()) {
@@ -41,7 +42,7 @@ public class CountyService {
         }
     }
 
-    public ListResponse getAllCounties(int page, int perPage, String search, Long countyId) {
+    public ListResponse getAllCounties(Integer page, Integer perPage, String search, Integer countyId) {
 
         page = page - 1;
         Sort sort = Sort.by(Sort.Direction.DESC, "id");

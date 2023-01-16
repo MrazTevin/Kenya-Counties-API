@@ -8,9 +8,7 @@ import com.ke.location.web.rest.dto.CountyDto;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.web.rest.dto.RestResponse;
 
-import com.ke.location.web.rest.dto.SubCountyDto;
-import com.ke.location.web.rest.request.CountyRequest;
-import com.ke.location.web.rest.request.SubCountyRequest;
+
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +21,10 @@ import java.util.Optional;
 
 
 @Slf4j
-@RequestMapping(path = "/api/v1")
+@RestController
+@RequestMapping(path = "/api/subCounty")
 public class SubCountyResource {
-    @Autowired
+
     private ModelMapper modelMapper;
 
     @Autowired
@@ -33,31 +32,112 @@ public class SubCountyResource {
     @Autowired
     private CountyService countyService;
 
-    @PostMapping("/subCounty")
-    ResponseEntity< SubCounty>addSubCounty(@RequestBody SubCounty subCounty) {
-        log.info("request to add new subCountyCounty");
-
-        SubCounty newSubCounty = subCountyService.addSubCounty(subCounty);
-
-        return new ResponseEntity<>(newSubCounty, HttpStatus.OK);
-    }
+//    @PostMapping("/subCounty")
+//    ResponseEntity< SubCounty>addSubCounty(@RequestBody SubCounty subCounty) {
+//        log.info("request to add new subCountyCounty");
+//
+//        SubCounty newSubCounty = subCountyService.addSubCounty(subCounty);
+//
+//        return new ResponseEntity<>(newSubCounty, HttpStatus.OK);
+//    }
 
     @GetMapping("/filter-by-subCounty-name")
-    public ResponseEntity<?> filterBySubCountyNameAndCooperativeId(
+    public ResponseEntity<?> filterBySubCountyNameAndCountyId(
             @RequestParam("per_page") int perPage,
-            @RequestParam("page") int page,//later we will use security credential
-            @RequestParam(name = "id", required = false) Long id,
+            @RequestParam("page") int page,
+            @RequestParam(name = "id", required = false) Integer countyId,
             @RequestParam(name = "name", required = false) String name
     ) {
 
         try {
 
 
-            ListResponse subCounty = subCountyService.filterByNameAndCountyId(
+            ListResponse subCounty = subCountyService.filterBySubCountyAndCountyId(
+                    page,
+                    perPage,
+                    countyId,
+                    name
+            );
+            //LATER add HTTP headers
+            return ResponseEntity.ok().body(subCounty);
+        } catch (Exception e) {
+            log.error("Error occurred ", e);
+            return new ResponseEntity<>(new RestResponse(true, "An Error occurred, contact admin"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/filter-by-ward")
+    public ResponseEntity<?> filterByWardAndCountyId(
+            @RequestParam("per_page") int perPage,
+            @RequestParam("page") int page,//later we will use security credential
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "ward", required = false) String ward
+    ) {
+
+        try {
+
+
+            ListResponse subCounty = subCountyService.filterByWardAndCountyId(
                     page,
                     perPage,
                     id,
-                    name
+                    ward
+            );
+            //LATER add HTTP headers
+            return ResponseEntity.ok().body(subCounty);
+        } catch (Exception e) {
+            log.error("Error occurred ", e);
+            return new ResponseEntity<>(new RestResponse(true, "An Error occurred, contact admin"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/filter-by-ward-constituencyName")
+    public ResponseEntity<?> filterByWardAndConstituencyName(
+            @RequestParam("per_page") int perPage,
+            @RequestParam("page") int page,//later we will use security credential
+            @RequestParam(name = "id", required = false) String name,
+            @RequestParam(name = "ward", required = false) String ward
+    ) {
+
+        try {
+
+
+            ListResponse subCounty = subCountyService.filterByWardAndSubCounty(
+                    page,
+                    perPage,
+                    name,
+                    ward
+            );
+            //LATER add HTTP headers
+            return ResponseEntity.ok().body(subCounty);
+        } catch (Exception e) {
+            log.error("Error occurred ", e);
+            return new ResponseEntity<>(new RestResponse(true, "An Error occurred, contact admin"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    @GetMapping("/filter-by-ward-subCountyName-CountyId")
+    public ResponseEntity<?> filterByWardAndSubCountyNameAndCountyId(
+            @RequestParam("per_page") int perPage,
+            @RequestParam("page") Integer page,//later we will use security credential
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "ward", required = false) String ward
+    ) {
+
+        try {
+
+
+            ListResponse subCounty = subCountyService.filterByWardAndNameAndCountyId(
+                    page,
+                    perPage,
+                    id,
+                    name,
+                    ward
             );
             //LATER add HTTP headers
             return ResponseEntity.ok().body(subCounty);
@@ -86,7 +166,7 @@ public class SubCountyResource {
 //        catch (Exception e) {
 //                log.error("error ", e);
 //                return new ResponseEntity<>(new RestResponse(true, "SubCounty not found, contact admin"),
-//                        HttpStatus.INTERNAL_SERVER_ERROR);
+//                        HttpStatus.IntegerERNAL_SERVER_ERROR);
 //            }
 //
 //    }
@@ -94,12 +174,12 @@ public class SubCountyResource {
     ResponseEntity<?> getAll(@RequestParam("per_page") int perPage,
                              @RequestParam("page") int page,
                              @RequestParam(name="search", required = false) String search,
-                             @RequestParam(name = "subCounty_id", required = false) Long subCountyId) {
+                             @RequestParam(name = "id", required = false) Integer countyId) {
         log.info("Getting all SubCounties");
 
         try {
 
-            ListResponse listResponse = subCountyService.getAllSubCounties(page, perPage, search, subCountyId);
+            ListResponse listResponse = subCountyService.getAll(page, perPage, search, countyId);
             return new ResponseEntity<>(listResponse, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error ", e);

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CountyRequest {
-    public Long id;
+    public Integer id;
     public String name;
 
 }
