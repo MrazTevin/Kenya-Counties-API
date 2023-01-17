@@ -1,9 +1,8 @@
 package com.ke.location.service;
 
-import com.ke.location.entity.QSubCounty;
+
 import com.ke.location.entity.SubCounty;
-import com.ke.location.web.rest.dto.ListResponse;
-import com.ke.location.web.rest.dto.SubCountyDto;
+
 
 
 import com.ke.location.repository.SubCountyRepository;
