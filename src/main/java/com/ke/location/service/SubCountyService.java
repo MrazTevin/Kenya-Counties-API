@@ -1,6 +1,7 @@
 package com.ke.location.service;
 
 import com.ke.location.entity.QSubCounty;
+import com.ke.location.entity.SubCounty;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.web.rest.dto.SubCountyDto;
 
@@ -101,6 +102,13 @@ public class SubCountyService {
         }
 
         return new ListResponse(subCountyPage.getContent(), subCountyPage.getTotalPages(), subCountyPage.getNumberOfElements(), subCountyPage.getTotalElements());
+    }
+
+
+
+
+    public Page<SubCounty> filterByWardSubCountyNameCountyId(String ward, String name, Integer countyId, int page, int size) {
+        return subCountyRepository.findByWardAndNameAndCountyId(ward, name, countyId, PageRequest.of(page, size));
     }
 
 }
