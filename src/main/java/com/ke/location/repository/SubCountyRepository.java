@@ -1,6 +1,6 @@
 package com.ke.location.repository;
 
-import com.ke.location.web.rest.dto.SubCountyDto;
+
 import com.ke.location.entity.SubCounty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
