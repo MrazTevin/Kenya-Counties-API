@@ -64,5 +64,12 @@ public class CountyService {
         }
 
 
+
     }
+
+
+    public Page<County> getAllCounties(Pageable pageable) {
+        return countyRepository.findAll(pageable);
+    }
+
 }

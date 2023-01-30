@@ -9,6 +9,8 @@ import com.ke.location.web.rest.request.CountyRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,21 +57,29 @@ public class CountyResource {
         }
 
     }
+//    @GetMapping
+//    ResponseEntity<?> getAll(@RequestParam("per_page") Integer perPage,
+//                             @RequestParam("page") Integer page,
+//                             @RequestParam(name="search", required = false) String search,
+//                             @RequestParam(name = "county_id", required = false) Integer countyId) {
+//        log.info("Getting all Counties");
+//
+//        try {
+//
+//            ListResponse listResponse = countyService.getAllCounties(page, perPage, search, countyId);
+//            return new ResponseEntity<>(listResponse, HttpStatus.OK);
+//        } catch (Exception e) {
+//            log.error("Error ", e);
+//            return new ResponseEntity(new RestResponse(true, "Error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//    }
     @GetMapping
-    ResponseEntity<?> getAll(@RequestParam("per_page") Integer perPage,
-                             @RequestParam("page") Integer page,
-                             @RequestParam(name="search", required = false) String search,
-                             @RequestParam(name = "county_id", required = false) Integer countyId) {
-        log.info("Getting all Counties");
-
-        try {
-
-            ListResponse listResponse = countyService.getAllCounties(page, perPage, search, countyId);
-            return new ResponseEntity<>(listResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("Error ", e);
-            return new ResponseEntity(new RestResponse(true, "Error occurred"), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+    public ResponseEntity<Page<County>> getAllCounties(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(name="search", required = false) String search) {
+        Page<County> counties = countyService.getAllCounties(PageRequest.of(page, size));
+        return ResponseEntity.ok().body(counties);
     }
 }
