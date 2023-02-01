@@ -21,7 +21,8 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/api/subCounty")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "/api1/subCounty")
 public class SubCountyResource {
 
     private ModelMapper modelMapper;
