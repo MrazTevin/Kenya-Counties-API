@@ -55,4 +55,19 @@ public class SubCountyService {
         return subCountyRepository.findByWardAndNameAndCountyId(ward, name, countyId, PageRequest.of(page, size));
     }
 
+    public Page<SubCounty> getSubCountiesByName(String name, int page, int size) {
+        if (name == null) {
+            return subCountyRepository.findAll(PageRequest.of(page, size));
+        } else {
+            return subCountyRepository.findByNameContaining(name, PageRequest.of(page, size));
+        }
+    }
+
+    public Page<SubCounty> getByWard(String ward, int page, int size) {
+        if (ward == null) {
+            return subCountyRepository.findAll(PageRequest.of(page, size));
+        } else {
+            return subCountyRepository.findByWardContaining(ward, PageRequest.of(page, size));
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.ke.location.web.rest;
 
 import com.ke.location.entity.County;
+import com.ke.location.entity.SubCounty;
 import com.ke.location.service.CountyService;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.web.rest.dto.RestResponse;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "/api1/county")
 @RequestMapping(path = "/api1/county")
 
 public class CountyResource {
@@ -82,5 +83,13 @@ public class CountyResource {
             @RequestParam(name="search", required = false) String search) {
         Page<County> counties = countyService.getAllCounties(PageRequest.of(page, size));
         return ResponseEntity.ok().body(counties);
+    }
+    @GetMapping("/name")
+    public Page<County> getCountiesByName(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size
+    ) {
+        return countyService.getCountiesByName(name, page, size);
     }
 }

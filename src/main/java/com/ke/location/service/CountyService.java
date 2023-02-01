@@ -2,6 +2,7 @@ package com.ke.location.service;
 
 
 
+import com.ke.location.entity.SubCounty;
 import com.ke.location.web.rest.dto.CountyDto;
 import com.ke.location.web.rest.dto.ListResponse;
 import com.ke.location.entity.County;
@@ -70,6 +71,13 @@ public class CountyService {
 
     public Page<County> getAllCounties(Pageable pageable) {
         return countyRepository.findAll(pageable);
+    }
+    public Page<County> getCountiesByName(String name, int page, int size) {
+        if (name == null) {
+            return countyRepository.findAll(PageRequest.of(page, size));
+        } else {
+            return countyRepository.findByNameContaining(name, PageRequest.of(page, size));
+        }
     }
 
 }

@@ -31,7 +31,22 @@ public class SubCountyResource {
     private SubCountyService subCountyService;
     @Autowired
     private CountyService countyService;
-
+    @GetMapping
+    public Page<SubCounty> getSubCountiesByName(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size
+    ) {
+        return subCountyService.getSubCountiesByName(name, page, size);
+    }
+    @GetMapping("/ward")
+    public Page<SubCounty> getByWard(
+            @RequestParam(value = "ward") String ward,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size
+    ) {
+        return subCountyService.getByWard(ward, page, size);
+    }
     @GetMapping("/filter-subCounty-countyId")
     public Page<SubCounty> filterBySubCountyAndCountyId(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "countyId", required = false) Integer countyId, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size) {
         return subCountyService.filterByNameAndCountyId(name, countyId, page, size);

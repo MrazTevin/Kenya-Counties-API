@@ -21,6 +21,9 @@ public interface SubCountyRepository extends PagingAndSortingRepository<SubCount
     Page<SubCounty> findByWardAndCountyId(String ward, Integer countyId, PageRequest of);
 
     Page<SubCounty> findByNameAndCountyId(String name, Integer countyId, PageRequest of);
+    Page<SubCounty> findByNameContaining(String name, Pageable pageable);
+
+    Page<SubCounty> findByWardContaining(String ward, Pageable pageable);
 
     // Page<SubCountyDto> findByCountyIdAndSubCountyNameAndWardContaining(Integer countyId, String name, String ward, Pageable pageable);
 }
