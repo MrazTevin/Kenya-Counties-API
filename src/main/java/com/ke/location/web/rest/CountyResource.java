@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 @Slf4j
 @RestController
-@RequestMapping(path = "/api/county")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "/api1/county")
 
 public class CountyResource {
     @Autowired
