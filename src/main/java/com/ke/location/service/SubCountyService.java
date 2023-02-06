@@ -1,6 +1,7 @@
 package com.ke.location.service;
 
 
+import com.ke.location.entity.County;
 import com.ke.location.entity.SubCounty;
 
 
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,51 +25,30 @@ public class SubCountyService {
     @Autowired
     private SubCountyRepository subCountyRepository;
 
-//    public SubCounty addSubCounty(SubCounty subCounty) {
-//        return subCountyRepository.save(subCounty);
+
+    public List<SubCounty> getSubCountiesByCountyId(Integer countyId) {
+        return subCountyRepository.findByCountyId(countyId);
+    }
+    public List<SubCounty> getAllWards() {
+        return subCountyRepository.findAll();
+    }
+//    public List<SubCounty> getWardsByName(String name) {
+//        return subCountyRepository.findByName(name);
 //    }
-////    public Optional<SubCountyDto> findById(Long id, Long countyId) {
-////
-////        return subCountyRepository.findByCountyIdAndId(countyId, id);
-////    }
-
-
-
-    public Page<SubCounty> filterByNameAndCountyId(String name, Integer countyId ,int page, int size) {
-        return subCountyRepository.findByNameAndCountyId(name, countyId, PageRequest.of(page, size));
+public List<SubCounty> filterByCountyAndSubcountyAndWardAndSearch(Integer countyId, String name, String ward, String search) {
+    if (countyId == null && name == null && ward == null && search == null) {
+        return subCountyRepository.findAll();
     }
-    public Page<SubCounty> filterByWardAndName(String ward, String name, int page, int size) {
-        return subCountyRepository.findByWardAndName(ward, name, PageRequest.of(page, size));
+    if (countyId != null && name == null && ward == null && search == null) {
+        return subCountyRepository.findByCountyId(countyId);
     }
-    public Page<SubCounty> filterByWardAndCountyId(String ward, Integer countyId ,int page, int size) {
-        return subCountyRepository.findByWardAndCountyId(ward, countyId, PageRequest.of(page, size));
+    if (countyId != null && name != null && ward == null && search == null) {
+        return subCountyRepository.findByCountyIdAndName(countyId, name);
     }
-
-
-
-
-
-
-
-
-
-    public Page<SubCounty> filterByWardAndSubCountyNameCountyId(String ward, String name, Integer countyId, int page, int size) {
-        return subCountyRepository.findByWardAndNameAndCountyId(ward, name, countyId, PageRequest.of(page, size));
+    if (countyId != null && name != null && ward != null && search == null) {
+        return subCountyRepository.findByCountyIdAndNameAndWard(countyId, name, ward);
     }
+    return subCountyRepository.findByNameContainingIgnoreCaseOrCountyNameContainingIgnoreCaseOrWardContainingIgnoreCase(search, search, search);
+}
 
-    public Page<SubCounty> getSubCountiesByName(String name, int page, int size) {
-        if (name == null) {
-            return subCountyRepository.findAll(PageRequest.of(page, size));
-        } else {
-            return subCountyRepository.findByNameContaining(name, PageRequest.of(page, size));
-        }
-    }
-
-    public Page<SubCounty> getByWard(String ward, int page, int size) {
-        if (ward == null) {
-            return subCountyRepository.findAll(PageRequest.of(page, size));
-        } else {
-            return subCountyRepository.findByWardContaining(ward, PageRequest.of(page, size));
-        }
-    }
 }
