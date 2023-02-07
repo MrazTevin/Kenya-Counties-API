@@ -5,22 +5,24 @@ import com.ke.location.entity.SubCounty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SubCountyRepository extends PagingAndSortingRepository<SubCounty,Integer>, QuerydslPredicateExecutor<SubCounty> {
+public interface SubCountyRepository extends JpaRepository<SubCounty,Integer> {
 
-    Page<SubCounty> findByWardAndNameAndCountyId(String ward, String name, Integer countyId, PageRequest of);
 
-    Page<SubCounty> findByWardAndName(String ward, String name, PageRequest of);
+    List<SubCounty> findByCountyId(Integer countyId);
 
-    Page<SubCounty> findByWardAndCountyId(String ward, Integer countyId, PageRequest of);
 
-    Page<SubCounty> findByNameAndCountyId(String name, Integer countyId, PageRequest of);
+    List<SubCounty> findByCountyIdAndName(Integer countyId, String name);
 
-    // Page<SubCountyDto> findByCountyIdAndSubCountyNameAndWardContaining(Integer countyId, String name, String ward, Pageable pageable);
+    List<SubCounty> findByNameContainingIgnoreCaseOrCountyNameContainingIgnoreCaseOrWardContainingIgnoreCase(String name, String ward,String countyName);
+
+    List<SubCounty> findByCountyIdAndNameAndWard(Integer countyId, String name, String ward);
 }
